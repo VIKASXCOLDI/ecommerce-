@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refreshing Drinks</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(to bottom right, #cdbdb8, #230d0d);
+        }
+        /* Header Styles */
+        header {
+            background-color: #2a120e;
+            color: #fff;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header a {
+            color: #ffcc80;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .back-menu {
+            display: inline-flex;
+            align-items: center;
+            background-color: #8a6b1e;
+            color: white;
+            padding: 12px 25px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 20px;
+            left: 20px;
+        }
+        .back-menu:hover {
+            background-color: #225edf85;
+            transform: scale(1.05);
+        }
+        .back-menu span {
+            margin-left: 8px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ff6f61;
+            margin-bottom: 20px;
+        }
+        .category {
+            margin-bottom: 40px;
+        }
+        .category h2 {
+            font-size: 2em;
+            color: #ff6f61;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(165, 75, 75, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .card h3 {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .price {
+            font-size: 1.2em;
+            color: #777;
+            margin: 10px 0;
+        }
+        .add-to-cart {
+            background: #ff6f61;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .add-to-cart:hover {
+            background: #e65c50;
+        }
+        #shopping-cart {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #c74d4d;
+            width: 200px;
+            position: fixed;
+            border-radius: 10px;
+            right: 20px;
+            top: 100px;
+        }
+
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        /* Shopping Cart Styles */
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #8c5252;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(228, 10, 10, 0.2);
+            width: 250px;
+        }
+
+        .cart h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .cart-items {
+            text-align: left;
+            color: white;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            margin-top: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        Refreshing Drinks for Summer
+        <br>
+        <a href="file:///C:/Users/vikas%20yadav/Desktop/website2/index.html#menu">Back to Menu</a>
+    </header>
+
+    <!-- Cart Section -->
+    <div class="cart">
+        <h3>Cart</h3>
+        <ul id="cart-items"></ul>
+        <p id="cart-total">Total: $0.00</p>
+        <p id="cart-total-inr">Total: ₹0.00</p>
+    </div>
+    
+    <div class="category">
+        <h2></h2>
+        <div class="grid">
+            <div class="card" data-name="" data-price="$4.50">
+                <img src="" alt="">
+                <h3></h3>
+                <p class="price">₹391.50</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="card" data-name="" data-price="$5.00">
+                <img src="" alt="">
+                <h3></h3>
+                <p class="price">₹435.00</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="card" data-name="" data-price="$4.00">
+                <img src="" alt="">
+                <h3></h3>
+                <p class="price">₹348.00</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="card" data-name="" data-price="$3.50">
+                <img src="" alt="">
+                <h3></h3>
+                <p class="price">₹304.50</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="category">
+        <h2>Citrusy & Zesty 🍊🍋</h2>
+        <div class="grid">
+            <div class="card" data-name="Ginger Lemon Fizz" data-price="$2.50">
+                <img src="Ginger Lemon Fizz.jpeg" alt="Ginger Lemon Fizz">
+                <h3>Ginger Lemon Fizz</h3>
+                <p class="price">₹217.50</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="card" data-name="Orange Mint Spritz" data-price="$3.55">
+                <img src="Orange Mint Spritz.jpeg" alt="Orange Mint Spritz">
+                <h3>Orange Mint Spritz</h3>
+                <p class="price">₹308.85</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="card" data-name="Grapefruit Rosemary Tonic" data-price="$2.75">
+                <img src="Grapefruit Rosemary Tonic.jpeg" alt="Grapefruit Rosemary Tonic">
+                <h3>Grapefruit Rosemary Tonic</h3>
+                <p class="price">₹239.25</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="card" data-name="Lime & Coconut Cooler" data-price="$4.50">
+                <img src="Lime & Coconut Cooler.jpeg" alt="Lime & Coconut Cooler">
+                <h3>Lime & Coconut Cooler</h3>
+                <p class="price">₹391.50</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+        </div>
+    </div>
+    
+    <div class="category">
+        <h2>Creamy & Indulgent 🥭🥥</h2>
+        <div class="grid">
+            <div class="card" data-name="Mango Lassi" data-price="$5.49">
+                <img src="Mango Lassi.jpg" alt="Mango Lassi">
+                <h3>Mango Lassi</h3>
+                <p class="price">₹478.63</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+            <div class="card" data-name="Avocado Coconut Smoothie" data-price="$5.00">
+                <img src="Avocado Coconut Smoothie.jpg" alt="Avocado Coconut Smoothie">
+                <h3>Avocado Coconut Smoothie</h3>
+                <p class="price">₹435.00</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+            <div class="card" data-name="Strawberry Banana drink" data-price="$3.00">
+                <img src="strawberry Banana drink.jpeg" alt="Strawberry Banana drink">
+                <h3>Strawberry Banana drink</h3>
+                <p class="price">₹261.00</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+            <div class="card" data-name="Iced Matcha Latte" data-price="$3.75">
+                <img src="Iced Matcha Latte.jpeg" alt="Iced Matcha Latte">
+                <h3>Iced Matcha Latte</h3>
+                <p class="price">₹326.25</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+        </div>
+    </div>
+    
+    <div class="category">
+        <h2>Icy & Slushy ❄️🍹</h2>
+        <div class="grid">
+            <div class="card" data-name="Frozen Lemonade" data-price="$4.90">
+                <img src="download.jpeg" alt="Frozen Lemonade">
+                <h3>Frozen Lemonade</h3>
+                <p class="price">₹426.30</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+            <div class="card" data-name="Peach Iced Tea Slush" data-price="$1.50">
+                <img src="Peach Iced Tea Slush.jpeg" alt="Peach Iced Tea Slush">
+                <h3>Peach Iced Tea Slush</h3>
+                <p class="price">₹130.50</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+            <div class="card" data-name="Frozen Sangria" data-price="$2.50">
+                <img src="Frozen Sangria.jpeg" alt="Frozen Sangria">
+                <h3>Frozen Sangria (Mocktail or Cocktail)</h3>
+                <p class="price">₹217.50</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+            <div class="card" data-name="Coconut Lime Granita" data-price="$3.75">
+                <img src="Coconut Lime Granita.jpeg" alt="Coconut Lime Granita">
+                <h3>Coconut Lime Granita</h3>
+                <p class="price">₹326.25</p> <!-- Updated price -->
+                <button class="add-to-cart">Add to Cart</button>  
+            </div>
+        </div>
+    </div>
+    <script>
+        function addToCart(name, price) {
+            const userName = prompt("Enter your name:");
+            const userPhone = prompt("Enter your phone number:");
+            const userAddress = prompt("Enter your address:");
+            
+            if (!userName || !userPhone || !userAddress) {
+                alert("All fields are required!");
+                return;
+            }
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1, userName, userPhone, userAddress });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartUI();
+            alert("Item added to cart successfully!");
+        }
+        
+        function updateCartUI() {
+            const cartItems = document.querySelector('#cart-items');
+            const cartTotal = document.querySelector('#cart-total');
+            const cartTotalINR = document.querySelector('#cart-total-inr');
+            let totalPrice = 0;
+            const exchangeRate = 87;
+            cartItems.innerHTML = '';
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.forEach(item => {
+                const cartItem = document.createElement('li');
+                cartItem.textContent = `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`;
+                cartItems.appendChild(cartItem);
+                totalPrice += item.price * item.quantity;
+            });
+            
+            cartTotal.textContent = `Total: $${totalPrice.toFixed(2)}`;
+            cartTotalINR.textContent = `Total: ₹${(totalPrice * exchangeRate).toFixed(2)}`;
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', event => {
+                    const item = event.target.closest('.card');
+                    const name = item.dataset.name;
+                    const price = parseFloat(item.dataset.price.replace('$', '')); // Convert price to number
+                    addToCart(name, price);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
