@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Beverages</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f1e5;
+            text-align: center;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #4e342e;
+            color: #fff;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header a {
+            color: #ffcc80;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff8f0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.03);
+        }
+
+        .menu-image {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .menu-details {
+            text-align: left;
+            flex: 1;
+        }
+
+        .name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #4e342e;
+        }
+
+        .text {
+            font-size: 16px;
+            color: #6d4c41;
+            line-height: 1.5;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d2691e;
+        }
+
+        .buy-btn {
+            background-color: #8d6e63;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: #6d4c41;
+        }
+
+        /* Shopping Cart Styles */
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #8c5252;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(228, 10, 10, 0.2);
+            width: 250px;
+        }
+
+        .cart h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .cart-items {
+            text-align: left;
+            color: white;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            margin-top: 10px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Hot Beverages
+        <br>
+        <a href="file:///C:/Users/vikas%20yadav/Desktop/website2/index.html#menu">Back to Menu</a>
+    </header>
+
+
+
+    <div class="cart">
+        <h3>Cart</h3>
+        <div class="cart-items"></div>
+        <p class="cart-total">Total: $0.00</p>
+        <p class="cart-total-inr">Total: ₹0.00</p>
+    </div>
+    
+    <section class="menu-section">
+        <h2 class="section-title">6 Different Types of Hot Coffee</h2>
+        <ul class="menu-list">
+            <li class="menu-item" data-name="Americano" data-price="3.50">
+                <img src="Image-1_Americano.png" alt="Americano" class="menu-image">
+                <div class="menu-details">
+                    <h3 class="name">Americano</h3>
+                    <p class="text">A classic espresso-based coffee diluted with hot water for a rich, smooth flavor.</p>
+                    <p class="price">Price: 304.50 rupees</p>
+                </div>
+                <button class="buy-btn">Add to Cart</button>
+            </li>
+            <li class="menu-item" data-name="Decaf Coffee" data-price="3.00">
+              <img src="Image-2_Decaf.png" alt="Decaf Coffee" class="menu-image">
+              <div class="menu-details">
+                  <h3 class="name">Decaf Coffee</h3>
+                  <p class="text">A smooth, caffeine-free option with the same rich coffee taste.</p>
+                  <p class="price">Price:  261.00 ruppes</p>
+              </div>
+              <button class="buy-btn">Add to Cart</button>
+          </li>
+          <li class="menu-item" data-name="Cortado" data-price="4.00">
+            <img src="Image-3_Cortado.png" alt="Cortado" class="menu-image">
+            <div class="menu-details">
+                <h3 class="name">Cortado</h3>
+                <p class="text">A Spanish coffee with equal parts espresso and warm milk.</p>
+                <p class="price">Price:  348.00 rupees</p>
+            </div>
+            <button class="buy-btn">Add to Cart</button>
+        </li>
+        <li class="menu-item" data-name="Ristretto" data-price="4.50">
+            <img src="Image-4_Ristretto.png" alt="Ristretto" class="menu-image">
+            <div class="menu-details">
+                <h3 class="name">Ristretto</h3>
+                <p class="text">A stronger, shorter espresso shot with intense flavor.</p>
+                <p class="price">Price: 391.00 rupees</p>
+            </div>
+            <button class="buy-btn">Add to Cart</button>
+        </li>
+            <li class="menu-item" data-name="Cappuccino" data-price="4.00">
+                <img src="Image-5_Cappucino.png" alt="Cappuccino" class="menu-image">
+                <div class="menu-details">
+                    <h3 class="name">Cappuccino</h3>
+                    <p class="text">A luxurious blend of espresso, steamed milk, and a thick layer of foam.</p>
+                    <p class="price">Price: 348.00 rupees</p>
+                </div>
+                <button class="buy-btn">Add to Cart</button>
+            </li>
+            <li class="menu-item" data-name="Irish Coffee" data-price="5.50">
+                <img src="Image-6_Irish-Coffee.png" alt="Irish Coffee" class="menu-image">
+                <div class="menu-details">
+                    <h3 class="name">Irish Coffee</h3>
+                    <p class="text">A delightful mix of coffee, Irish whiskey, sugar, and topped with cream.</p>
+                    <p class="price">Price: 478.50 rupees</p>
+                </div>
+                <button class="buy-btn">Add to Cart</button>
+            </li>
+        </ul>
+    </section>
+<script>
+    function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let existingItem = cart.find(item => item.name === name);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ name, price, quantity: 1 });
+        }
+    
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI();
+        alert("Item added to cart successfully!");
+    }
+    
+    function updateCartUI() {
+        const cartItems = document.querySelector('.cart-items');
+        const cartTotal = document.querySelector('.cart-total');
+        const cartTotalINR = document.querySelector('.cart-total-inr');
+        let totalPrice = 0;
+        const exchangeRate = 87;
+        cartItems.innerHTML = '';
+        
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.forEach(item => {
+            const cartItem = document.createElement('p');
+            cartItem.textContent = `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`;
+            cartItems.appendChild(cartItem);
+            totalPrice += item.price * item.quantity;
+        });
+        
+        cartTotal.textContent = `Total: $${totalPrice.toFixed(2)}`;
+        cartTotalINR.textContent = `Total: ₹${(totalPrice * exchangeRate).toFixed(2)}`;
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartUI();
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', event => {
+                const item = event.target.closest('.menu-item');
+                const name = item.dataset.name;
+                const price = parseFloat(item.dataset.price);
+                addToCart(name, price);
+            });
+        });
+    });
+    </script>
+    
+    
+</body>
+</html>
