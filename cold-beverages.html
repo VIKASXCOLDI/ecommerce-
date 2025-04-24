@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cold Beverages</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fecbc8;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #dfe4f1;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        header {
+            background-color: #5e1d0ee2;
+            color: #170202;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .card {
+            background: linear-gradient(135deg, #e6dddd, #a6aeb2);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .buy-btn {
+            display: inline-block;
+            background-color: #bd4f13;
+            color: rgb(221, 199, 199);
+            padding: 8px 16px;
+            margin-top: 10px;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .buy-btn:hover {
+            background-color: #eba925bb;
+        }
+        /* Cart Styles */
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgb(146, 47, 47);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(217, 85, 85, 0.2);
+            width: 250px;
+            text-align: left;
+            color: white;
+        }
+        .cart h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .cart ul {
+            list-style: none;
+            padding: 0;
+        }
+        .cart ul li {
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Cold Beverages - Stay Cool This Summer!
+        <br>
+        <a href="file:///C:/Users/vikas%20yadav/Desktop/website2/index.html#menu">Back to Menu</a>
+    </header>
+<br>
+
+    <!-- Cart Section -->
+    <div class="cart">
+        <h3>Cart</h3>
+        <ul id="cart-items"></ul>
+        <p id="cart-total">Total: $0.00</p>
+        <p id="cart-total-inr">Total: ₹0.00</p>
+    </div>
+
+    <!-- Cold Beverages -->
+    <div class="container">
+        <div class="card" data-name="Cafe Mocha with Whip cream" data-price="4.99">
+            <img src="Cafe Mocha with Whip cream.jpg" alt="Cafe Mocha with Whip cream">
+            <div class="card-content">
+                <h2>Cafe Mocha with Whip cream</h2>
+                <p>₹434.87</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Iced Chocolate Cocoa" data-price="3.99">
+            <img src="iced chocolate cocoa.jpg" alt="Iced Chocolate Cocoa">
+            <div class="card-content">
+                <h2>Iced Chocolate Cocoa</h2>
+                <p>₹347.72</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Mango Lassi" data-price="4.65">
+            <img src="Mango Lassi.jpg" alt="Mango Lassi">
+            <div class="card-content">
+                <h2>Mango Lassi</h2>
+                <p>₹478.44</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Iced Dalgona Coffee" data-price="4.79">
+            <img src="Iced Dalgona Coffee.jpg" alt="Iced Dalgona Coffee">
+            <div class="card-content">
+                <h2>Iced Dalgona Coffee</h2>
+                <p>₹417.44</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Iced Coffee or Cold Brew" data-price="4.29">
+            <img src="Iced Coffee or Cold Brew.png" alt="Iced Coffee or Cold Brew">
+            <div class="card-content">
+                <h2>Iced Coffee or Cold Brew</h2>
+                <p>₹373.86</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Frappuccino" data-price="4.99">
+            <img src="Frappuccino.jpg" alt="Frappuccino">
+            <div class="card-content">
+                <h2>Frappuccino</h2>
+                <p>₹434.87</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Caramel Iced Coffee" data-price="3.99">
+            <img src="caramel iced coffee.jpg" alt="Caramel Iced Coffee">
+            <div class="card-content">
+                <h2>Caramel Iced Coffee</h2>
+                <p>₹347.72</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Pouring Milk in Black Coffee" data-price="5.49">
+            <img src="Pouring milk in black coffee.jpg" alt="Pouring Milk in Black Coffee">
+            <div class="card-content">
+                <h2>Pouring Milk in Black Coffee</h2>
+                <p>₹478.44</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Sweet Frozen Iced Coffee Slushie with Almond Milk" data-price="4.79">
+            <img src="Sweet Frozen Iced Coffee Slushie with Almond Milk.jpg" alt="Sweet Frozen Iced Coffee Slushie with Almond Milk">
+            <div class="card-content">
+                <h2>Sweet Frozen Iced Coffee Slushie with Almond Milk</h2>
+                <p>₹417.44</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Cold Chocolate Milkshake Frappe" data-price="5.99">
+            <img src="Cold chocolate milkshake frappe.jpg" alt="Cold Chocolate Milkshake Frappe">
+            <div class="card-content">
+                <h2>Cold Chocolate Milkshake Frappe</h2>
+                <p>₹522.01</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Cold Coffee" data-price="6.29">
+            <img src="cold coffee.jpeg" alt="Cold Coffee">
+            <div class="card-content">
+                <h2>Cold Coffee</h2>
+                <p>₹548.16</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Nondairy Chocolate Cream Cold Brew" data-price="7.49"> 
+            <img src="Nondairy Chocolate Cream Cold Brew..jpeg" alt="Nondairy Chocolate Cream Cold Brew">
+            <div class="card-content">
+                <h2>Nondairy Chocolate Cream Cold Brew</h2>
+                <p>₹652.73</p>
+                <button class="buy-btn">Add to Cart</button>  
+            </div>
+        </div>
+        <div class="card" data-name="Coffee Cocktail with Whipped Cream" data-price="6.99">
+            <img src="coffee coctail with whipped cream.jpg" alt="Coffee Cocktail with Whipped Cream">
+            <div class="card-content">
+                <h2>Coffee Cocktail with Whipped Cream</h2>
+                <p>₹609.16</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="card" data-name="Vanilla Sweet Cream Cold Brew" data-price="6.49">
+            <img src="Vanilla Sweet Cream Cold Brew..jpeg" alt="Vanilla Sweet Cream Cold Brew">
+            <div class="card-content">
+                <h2>Vanilla Sweet Cream Cold Brew</h2>
+                <p>₹565.59</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+          </div>
+          <div class="card" data-name="Coffee Cocktail with Whipped Cream" data-price="6.99">
+            <img src="coffee coctail with whipped cream.jpg" alt="Coffee Cocktail with Whipped Cream">
+            <div class="card-content">
+                <h2>Coffee Cocktail with Whipped Cream</h2>
+                <p>₹609.16</p>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function addToCart(name, price) {
+            const userName = prompt("Please enter your name:");
+            const userPhone = prompt("Please enter your phone number:");
+            const userAddress = prompt("Please enter your address:");
+
+            if (userName && userPhone && userAddress) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                let existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ name, price, quantity: 1, userName, userPhone, userAddress });
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartUI();
+                alert("Item added to cart successfully!");
+            } else {
+                alert("All fields are required!");
+            }
+        }
+
+        function updateCartUI() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const cartTotalINR = document.getElementById('cart-total-inr');
+            let totalPrice = 0;
+            const exchangeRate = 87;
+            cartItems.innerHTML = '';
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.forEach(item => {
+                const cartItem = document.createElement('li');
+                cartItem.textContent = `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`;
+                cartItems.appendChild(cartItem);
+                totalPrice += item.price * item.quantity;
+            });
+            cartTotal.textContent = `Total: $${totalPrice.toFixed(2)}`;
+            cartTotalINR.textContent = `Total: ₹${(totalPrice * exchangeRate).toFixed(2)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            document.querySelectorAll('.buy-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const item = event.target.closest('.card');
+                    const name = item.dataset.name;
+                    const price = parseFloat(item.dataset.price);
+                    addToCart(name, price);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
