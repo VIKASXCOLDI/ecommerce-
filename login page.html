@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(to right, #e2e2e2, #c9d6ff); }
+        .container { background: #fff; width: 400px; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center; }
+        .form-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem; }
+        .input-group { position: relative; margin: 15px 0; }
+        .input-group input { width: 100%; padding: 12px 40px 12px 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
+        .input-group i { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #777; }
+        .btn { width: 100%; padding: 10px; font-size: 1rem; border: none; border-radius: 5px; background: #7d7deb; color: white; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #07001f; }
+        .or { font-size: 1rem; margin: 1rem 0; color: #555; }
+        .links { display: flex; justify-content: space-between; font-size: 14px; margin-top: 1rem; }
+        .links a { text-decoration: none; color: #007bff; }
+        .links a:hover { text-decoration: underline; }
+        .message { display: none; margin-top: 10px; padding: 10px; background: #d4edda; color: #155724; border-radius: 5px; }
+        .signup-container { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Sign In Form -->
+    <div class="container" id="login-container">
+        <h1 class="form-title">Sign In</h1>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+            <button type="submit" class="btn">Sign In</button>
+        </form>
+        <div class="message" id="loginMessage"></div>
+        <p class="or">-------- or --------</p>
+        <div class="links">
+            <p>Don't have an account?</p>
+            <a href="#" id="show-signup">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="container signup-container" id="signup-container">
+        <h1 class="form-title">Sign Up</h1>
+        <form id="signupForm">
+            <div class="input-group">
+                <input type="text" id="fName" placeholder="First Name" required>
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="input-group">
+                <input type="text" id="lName" placeholder="Last Name" required>
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="input-group">
+                <input type="email" id="rEmail" placeholder="Email" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="input-group">
+                <input type="password" id="rPassword" placeholder="Password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+            <button type="submit" id="submitSignUp" class="btn">Sign Up</button>
+        </form>
+        <div class="message" id="signUpMessage"></div>
+        <p class="or">-------- or --------</p>
+        <div class="links">
+            <p>Already have an account?</p>
+            <a href="#" id="show-login">Sign In</a>
+        </div>
+    </div>
+
+    <!-- Firebase Authentication & Firestore -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIpBcjXNtSbKN6Byob1LlVOtIycjJe4SY",
+            authDomain: "login-form-a9a45.firebaseapp.com",
+            projectId: "login-form-a9a45",
+            storageBucket: "login-form-a9a45.appspot.com",
+            messagingSenderId: "589541215725",
+            appId: "1:589541215725:web:59f87dd7344653078d6be4",
+            measurementId: "G-CNK0Q65CS2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore();
+
+        function showMessage(message, divId) {
+            var messageDiv = document.getElementById(divId);
+            messageDiv.style.display = "block";
+            messageDiv.innerHTML = message;
+            setTimeout(() => { messageDiv.style.display = "none"; }, 5000);
+        }
+
+        // Sign Up
+        document.getElementById('signupForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = document.getElementById('rEmail').value;
+            const password = document.getElementById('rPassword').value;
+            const firstName = document.getElementById('fName').value;
+            const lastName = document.getElementById('lName').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    return setDoc(doc(db, "users", userCredential.user.uid), { email, firstName, lastName });
+                })
+                .then(() => showMessage("Account created successfully!", "signUpMessage"))
+                .catch(error => showMessage(error.message, "signUpMessage"));
+        });
+
+        // Sign In
+        document.getElementById('loginForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => showMessage("Login successful!", "loginMessage"))
+                .catch(error => showMessage(error.message, "loginMessage"));
+        });
+
+        // Toggle Forms
+        document.getElementById('show-signup').addEventListener('click', () => {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('signup-container').style.display = 'block';
+        });
+
+        document.getElementById('show-login').addEventListener('click', () => {
+            document.getElementById('signup-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
