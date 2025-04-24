@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee Website</title>
+    <!-- Linking Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        header {
+            background: linear-gradient(135deg, #8B4513, #4e342e);
+            color: #fff;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f3e5ab, #c79a6b); /* Coffee-inspired gradient */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .cart-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4e342e;
+        }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .cart-table th, .cart-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .cart-table th {
+            background-color: #8B4513;
+            color: white;
+        }
+
+        .cart-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .button {
+            background-color: #4e342e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background-color: #8B4513;
+        }
+
+        .remove-button {
+            background-color: #d9534f;
+        }
+
+        .remove-button:hover {
+            background-color: #c9302c;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .checkout-form {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-form input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .cart-table th, .cart-table td {
+                font-size: 14px;
+            }
+
+            .button {
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart-section" id="cart">
+        <h2 class="section-title">Your Cart</h2>
+        <div class="section-content">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </tbody>
+            </table>
+            <div class="cart-total">
+                <h3>Total: <span id="cart-total-price">₹0.00</span></h3>
+                <button class="button checkout-button" onclick="showCheckoutForm()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Form -->
+    <div class="checkout-form" id="checkout-form">
+        <h2>Checkout</h2>
+        <input type="text" id="card-number" placeholder="Card Number" required />
+        <input type="text" id="expiry-date" placeholder="Expiry Date (MM/YY)" required />
+        <input type="text" id="cvv" placeholder="CVV" required />
+        <button class="button" onclick="processCheckout()">Place Order</button>
+    </div>
+
+    <script>
+        // Cart functionality with local storage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const conversionRate = 87; // 1 USD = 87 INR
+
+        function updateCart() {
+            const cartTableBody = document.getElementById("cart-items");
+            cartTableBody.innerHTML = "";
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                let itemPrice = parseFloat(item.price); // Ensure price is a number
+                let itemTotal = itemPrice * item.quantity;
+
+                let row = `<tr>
+                    <td>${item.name}</td>
+                    <td>
+                        <button onclick="decreaseQuantity(${index})"><i class="fas fa-minus"></i></button> 
+                        ${item.quantity} 
+                        <button onclick="increaseQuantity(${index})"><i class="fas fa-plus"></i></button>
+                    </td>
+                    <td>₹${(itemPrice * conversionRate).toFixed(2)}</td>
+                    <td>₹${(itemTotal * conversionRate).toFixed(2)}</td>
+                    <td><button onclick="removeFromCart(${index})" class="remove-button"><i class="fas fa-trash"></i> Remove</button></td>
+                </tr>`;
+
+                cartTableBody.innerHTML += row;
+                totalPrice += itemTotal;
+            });
+
+            document.getElementById("cart-total-price").textContent = `₹${(totalPrice * conversionRate).toFixed(2)}`;
+            localStorage.setItem("cart", JSON.stringify(cart)); // Save to local storage
+        }
+
+        function addToCart(name, price) {
+            price = parseFloat(price); // Ensure price is stored as a number
+            let item = cart.find(i => i.name === name);
+            
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+
+            updateCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function increaseQuantity(index) {
+            cart[index].quantity++;
+            updateCart();
+        }
+
+        function decreaseQuantity(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity--;
+            } else {
+                removeFromCart(index);
+            }
+            updateCart();
+        }
+
+        function showCheckoutForm() {
+            document.getElementById("checkout-form").style.display = "block";
+        }
+
+        function processCheckout() {
+            const cardNumber = document.getElementById("card-number").value;
+            const expiryDate = document.getElementById("expiry-date").value;
+            const cvv = document.getElementById("cvv").value;
+
+            // Validate input fields
+            if (!cardNumber || !expiryDate || !cvv) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            // Simulate payment processing
+            alert("Processing your payment...");
+
+            // Simulate a delay for payment processing
+            setTimeout(() => {
+                // Here you would typically call your payment API
+                // For demonstration, we'll just simulate a successful checkout
+                alert(`Order placed successfully!\nCard Number: ${cardNumber}\nExpiry Date: ${expiryDate}\nCVV: ${cvv}`);
+
+                // Clear the cart and update the UI
+                cart = [];
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCart();
+                document.getElementById("checkout-form").style.display = "none"; // Hide the checkout form
+            }, 2000); // Simulate a 2-second delay
+        }
+
+        updateCart(); // Load cart on page load
+    </script>
+</body>
+</html>
